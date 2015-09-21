@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KrokoveMotory</name>
+    </assembly>
+    <members>
+        <member name="T:KrokoveMotory.RxOptoEventHandler">
+            <summary>
+            Delegat pro predani udalosti prijeti stavu optpzavory
+            </summary>
+            <param name="opto">byte se stavem optozavor</param>
+            <param name="status">retezec s informacni hlaskou OK nebo ERROR v zavislosti na uspesnosti prijeti dat</param>
+        </member>
+        <member name="T:KrokoveMotory.FtCommunication">
+            <summary>
+            Trida pro zajisteni komunikace mezi aplikaci a soustavou motoru
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.#ctor">
+            <summary>
+            Konstruktor
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.getConnection">
+            <summary>
+            Metoda pro predani informaci o pripojeni
+            </summary>
+            <returns>Vraci strukturu s informaci o pripojeni</returns>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.getConnection(System.String)">
+            <summary>
+            Metoda pro predani informace o stavu pripojeni konkreniho serioveho cisla
+            </summary>
+            <returns>Vraci informaci o pripojeni konkretniho serioveho cisla</returns>
+            <param name="serialNum">retezec obsahujci seriove cislo zarizeni jehoz pripojeni chceme zkontrolovat</param>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.openDevice(System.String)">
+            <summary>
+            Metoda pro pripojeni zarizeni podle serioveho cisla
+            </summary>
+            <param name="serialNum">Seriove cislo vybraneho zarizeni</param>
+            <returns>Vraci status zpravu o uspesnosti pripojeni</returns>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.closeDevice">
+            <summary>
+            Metoda pro ukonceni spojeni s aktualne pripojenym zarizenim
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.rotateMotor(MotorControl.RotParameters)">
+            <summary>
+            Metoda pro otaceni motorem podle zadanych parametru, seriovou linkou posle tri bajty s parametry otaceni
+            </summary>
+            <param name="rotParameters">Struktura s nastavenymi parametry otaceni</param>
+            <returns>Ft status</returns>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.getOptoStatus">
+            <summary>
+            Metoda pro odeslani pozadavku na zjisteni stavu optozavor
+            </summary>
+            <returns>Ft status</returns>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.stopRotation">
+            <summary>
+            Metoda pro zastaveni otacni motorem,
+            zpusobi preruseni procesoru a vynulovani vsech promennych spojenych s otacenim
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FtCommunication.resetDevice">
+            <summary>
+            Metoda pro resetovani celeho zarizeni, AVR a pak FTDI
+            </summary>
+        </member>
+        <member name="T:KrokoveMotory.FtCommunication.Connection">
+            <summary>
+            Struktura pro predavani vsech potrebnych inforamci o pripojeni
+            </summary>
+        </member>
+        <member name="T:KrokoveMotory.FormKM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:KrokoveMotory.FormKM.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.#ctor">
+            <summary>
+            Konstruktor 
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.addLog(System.String,System.String)">
+            <summary>
+            Metoda pro pridavani hlasek do okna LOG
+            </summary>
+            <param name="hlaska">Text popisujci informaci</param>
+            <param name="info">Vlastni informace</param>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.addLog">
+            <summary>
+            Metoda pro pridavani oddelovace do okna LOG
+            </summary>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.addDevice(System.String)">
+            <summary>
+            Metoda pro pridavani hlasek do okna zarizeni
+            </summary>
+            <param name="device">Retezec se seriovym cislem zarizeni</param>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.disableControl(System.Boolean)">
+            <summary>
+             Metoda pro deaktivaci ovladacich prvku rizeni motoru, tlacitka pro konfiguraci a odznaceni vybranych motoru
+            </summary>
+            <param name="all">Ucuje rozsah deaktivace, True = vsechny prvky, False = pouze ovladace motoru</param>
+        </member>
+        <member name="M:KrokoveMotory.FormKM.changeWorkingState(System.Boolean)">
+            <summary>
+            metoda pro nastavovani signalizace informujci o cinnosti soustavy
+            </summary>
+            <param name="state">True = pracuje, False = pripraven</param>
+        </member>
+        <member name="M:KrokoveMotory.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:KrokoveMotory.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:KrokoveMotory.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:KrokoveMotory.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrokoveMotory", "KrokoveMotory\KrokoveMotory.csproj", "{759C588E-2424-404F-942A-6B1387CF9649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorComponent", "MotorControl\MotorComponent.csproj", "{E582F006-461F-455C-87AC-BA91D6F0F66C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorVisualization", "MotorVisualization\MotorVisualization.csproj", "{7AAB77D7-DDA2-406D-8450-0AB4EA31B61C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorDependences", "MotorDependences\MotorDependences.csproj", "{71902AA1-9FC5-4A91-8C92-7022C65B3C19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{759C588E-2424-404F-942A-6B1387CF9649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759C588E-2424-404F-942A-6B1387CF9649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759C588E-2424-404F-942A-6B1387CF9649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759C588E-2424-404F-942A-6B1387CF9649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E582F006-461F-455C-87AC-BA91D6F0F66C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E582F006-461F-455C-87AC-BA91D6F0F66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E582F006-461F-455C-87AC-BA91D6F0F66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E582F006-461F-455C-87AC-BA91D6F0F66C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAB77D7-DDA2-406D-8450-0AB4EA31B61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAB77D7-DDA2-406D-8450-0AB4EA31B61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAB77D7-DDA2-406D-8450-0AB4EA31B61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAB77D7-DDA2-406D-8450-0AB4EA31B61C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71902AA1-9FC5-4A91-8C92-7022C65B3C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71902AA1-9FC5-4A91-8C92-7022C65B3C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71902AA1-9FC5-4A91-8C92-7022C65B3C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71902AA1-9FC5-4A91-8C92-7022C65B3C19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

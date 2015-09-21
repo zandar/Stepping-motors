@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MotorControl</name>
+    </assembly>
+    <members>
+        <member name="F:MotorControl.MotorControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:MotorControl.MotorControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:MotorControl.MotorControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:MotorControl.MotorControl.#ctor">
+            <summary>
+            Konstruktor
+            </summary>
+        </member>
+        <member name="M:MotorControl.MotorControl.setCaption(System.String)">
+            <summary>
+             Metoda pro nastaveni nadpisu komponenty 
+            </summary>
+            <param name="caption">obsahuje string retezec se jmenem komponenty</param>
+        </member>
+        <member name="T:MotorControl.Direction">
+             <summary>
+            Typ pro identifikaci stisknuteho tlacitka smeru otaceni
+             </summary>
+        </member>
+        <member name="T:MotorControl.MotorNum">
+            <summary>
+            Typ pro identifikaci ovladace motoru
+            </summary>
+        </member>
+        <member name="T:MotorControl.RotParameters">
+            <summary>
+            Struktura pro ulozeni parametru otaceni motorem
+            a identifikaci ovladace motoru a stisknuteho tlacitka smeru
+            </summary>
+        </member>
+        <member name="T:MotorControl.MyEventHandler">
+            <summary>
+            Delegát pro předání události na stisk tlačítka pro otočení motorem
+            vpravo nebo vlevo určenou rychlostí o zadaný počet kroků nebo výsečí. 
+            </summary>
+            <param name="RotParameters">Struktura obsahujci nastavene parametry + smer otaceni + identifikaci ovladace</param>
+        </member>
+    </members>
+</doc>

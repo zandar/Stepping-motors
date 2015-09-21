@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Krokové motory (Michal Vokáč)</title>
+	</head>
+	<body>
+	<div id="home">
+	    <h2>Komunikační rozhraní pro demonstrační sestavu krokových motorů<br />(Bakalářská práce)</h2>
+	    <h4>Michal Vokáč, 4. ročník ČVUT FEL </h4>
+	    <h4>předmět X35PJR 2008/2009</h4><hr />
+	</div>
+	<div>
+        <ul>
+            <li><a href="#uvod" title="stručná specifikace úkolu">úvod</a></li>
+            <li><a href="#hardware" title="popis harwerového řešení">hardware</a></li>
+            <li><a href="#software" title="popis softwarového řešení">software</a></li>
+            <li><a href="#zdroje" title="použité zdroje">použité zdroje</a></li>
+            <li><a href="#dokumentace" title="dokumentace">dokumentace</a></li>
+            <li><a href="#screenshots" title="obrázky aplikace">screenshots</a></li>
+        </ul><hr />
+    </div>
+	<div>
+	    <h3 id="uvod">Úvod</h3>
+	    Úkolem mojí práce bylo navrhnout vhodný <a href="#hardware">hardware</a> pro připojení demonstrační sestavy krokových motorů
+        k počítači a vytvořit jednoduché grafické uživatelské rozhraní pro ovládání této sestavy která již 
+        byla vytvořena jiným studentem jako jeho bakalářská práce.
+        <br /><br />
+        Pro připojení sestavy k počítači jsem zvolil rozhraní USB především kvůli jeho rozšíření na většině počítačích
+        včetně laptopů i starších strojů. Další velkou výhodou tohoto řešení je možnost napájet celé zařízení přímo
+        prostřednictvím USB portu počíte bez nutnosti používat externí zdroj, pokud jsou k zařízení připojeny maximálně
+        dva krokové motory. Pro větší počet motorů je již potřeba externí zdroj použít, protože proud odebíraný zařízením
+        s více připojenými motory by překročil maximální povolený proud odebíraný z USB portu který je 500mA.
+        <br /><br />
+        <a href="#home">nahoru -></a>
+    </div>
+    <div>
+        <h3 id="hardware">Harware</h3>
+        Hardwerová část sestává z <a href="control.pdf">desky s převodníkem</a> USB na sériové rozhraní UART od firmy FTDI. Konkrétně se 
+        jedná o čip FT232BM. K tomuto čipu je dále potřeba připojit externí krystal s frekvencí 6MHz a sériovou EEPROM
+        paměť která slouží k uložení údajů o výrobci, sériového výrobního čísla zařízení a poskytuje další volnou paměť pro
+        uživatele kam je možno uložit různé informace.
+        <br />
+        Novější řada těchto čipů má již krystal, EEPROM paměť i ostatní potřebné pasivní součástky integrované v pouzdře
+        a jednoduchost použití a snadná aplikace tohoto obvodu se tak ještě zvyšuje.
+        <br /><br />
+        Deska s FTDI čipem je prostřednictvím sériové linky a několika dalšími vodiči spojena s <a href="usb_uart.pdf">řídící deskou</a>.
+        Ta je osazena mikrokontrolérem ATMEL ATmega8, který po sériové lince přijímá řídící příkazy z aplikace,
+        které dekóduje. Na základě dekódovaných parametrů posílá řídící pulsy na jednu z maximálně čtyř možných připojených
+        výkonových desek.
+        <br /><br />
+        Výkonová deska je osazena mikrokontrolérem ATMEL ATtiny13, který příjmá z řídící desky krokovací pulsy
+        a signál určujcí směr otáčení motorem a podle toho prostředictvým výkonových prvků (pole darlingtonových tranzistorů
+        ULN2803) spíná jednotlivé fáze krokového motoru, který je k desce připojen. K výkonové desce je dále připojena
+        optozávora sledujcí polohu kotouče na hřídeli motoru. Optozávora je propojena přímo s řídící deskou, která sleduje
+        stav optozávory a sériovou linkou tento stav odesílá zpět do aplikace v PC. 
+        <br /><br />
+        <a href="#home">nahoru -></a>   
+     </div>
+     <div>
+        <h3 id="software">Software</h3>
+        <a href="#aplikace">Aplikace</a> sestává z jednoho hlavního okna které je rozděleno do tří funkčních částí.
+        Panel v levé horní části okna slouží pro grafické zobrazení polohy a pohybu kotoučů na hřídelích motorů.
+        <br /><br />
+        Pole pro zobrazení obrázku kotouče spolu s názvem a signalizací optozávory je vytvořeno jako samostatná komponenta, které se při požadavku
+        otáčení motorem předávají nastavené parametry otáčení podle nichž se obrázkem otáčí.
+        <br />
+        <img src="MotorImage.jpg" alt="MotorImage" title="komponenta zobrazení motoru"/>&nbsp<img src="kolecko.jpg" alt="kolecko" title="obrázek kotouče"/>
+        <br /><br />
+        Panel v levé spodní části bude sloužit pro zobrazení průběhů na jednotlivých fázích jednoho motoru pro lepší demonstraci
+        principu funkce a řízení krokového motoru (zatím není implementováno).
+        <br /><br />
+        V pravé části je umístěn panel se záložkami který slouží pro kompletní ovládání soustavy a sledovaní jejího chování.
+        <br /><br />
+        <b>Záložka <i>"Manual"</i></b><br />
+        Na kartě <a href="#manual"><i>Manual</i></a> jsou umístěny ovládací prvky pro řízení jendotlivých motorů. Pro tento účel jsem vytvořil samostatnou
+        komponentu, která seskupuje všechny ovládací prvky potřebné pro řízení jednoho motoru a umístil 4 tyto komponenty na panel.
+        <br />
+        <img src="MotorControl.jpg" alt="MotorControl" title="komponenta rizeni motoru" />
+        <br /><br />
+        Na komponentě je možné nastavovat požadovanou rychlost otáčení motorem (myšeno jako časová prodleva mezi dvěma po sobě následujcími
+        kroky v milisekundách), počet kroků o kolik se má motor otočit nebo počet sektorů (myšeno jako počet zářezů na kotouči po cca 50ti krocích)
+        přes které se má motor otočit. Dále jsou na komponentě tlačítka pro otočení motorem vpravo nebo vlevo. Po jejich stisknutí se pomocí události
+        předává struktura s nastavenými parametry otáčení (rychlost, počet kroků, počet sektorů, směr otáčení, číslo ovladače motoru) k dalšímu zpracování.
+        <br /><br />
+        <b>Záložka <i>"Demo"</i></b><br />
+        Na kartě <a href="#demo"><i>Demo</i></a> by mělo být k dispozici nekolik přednastavených <i>"profilů"</i> - zajímavých posloupností otáčení motory 
+        (zatím není implementováno).
+        <br /><br />
+        <b>Záložka <i>"Nastavení"</i></b><br />
+        Karta <a href="#nastaveni"><i>Natavení</i></a> slouží pro vyhledání a připojení zařízení dostupného na USB portu. 
+        <br />Vlastní komunikace mezi aplikací a FTDI zařízením je zprostředkována pomocí třídy FTDI. Ta je dostupná z knihovny FTD2XX_NET.DLL, která
+        je součástí instalace driverů pro FTDI zařízení. K této knihovně je přiložena i intelisense dokumentace jako XML soubor. Použití této knihovny
+        a komunikace se zařízením je pak poměrně snadná.
+        <br />Nejprve je nutné vyhledat dostupná zařízení. Sériová čísla všech dostupných FTDI zařízení vypisuji do listboxu a na vybrané zařízení je
+        možné se připojit. Po úspěšném připojení nějákého zařízení je aktivována možnost vybrat konfiguraci motorů - tedy vybrat, které motory jsou
+        připojeny k řídící desce. Tím se současně aktivují ovládací prvky vybraných motorů na záložce <i>Manual</i>.
+        <br /><br />
+        <b>Záložka <i>"LOG"</i></b><br />
+        Karta <a href="#log"><i>LOG</i></a> obsahuje pouze listbox který slouží pro kontrolní výpis informací, především status zpráv vracených při komunikaci s FTDI zařízením.
+        <br /><br />
+        V pravém dolním rohu aplikace je umístěno velké tlačítko STOP které umožňuje kdykoliv zastavit otáčejcí se motor.
+        <br /><br /><a href="#home">nahoru -></a>
+     </div>
+     <div>
+        <h3 id="zdroje">Zdroje</h3>
+        Stránky výrobce FTDI obvodů - výborná dokumentace a spousta jednoduchých příkladů ve většině programovacích jazyků<br /> (C++, C#, Delphi, LabVIEW, Visual Basic, Java, PERL)   
+        <a href="http://www.ftdichip.com">www.ftdichip.com</a>
+        <br />ASIX - výrobce všeljakých "uďelátek" <a href="http://www.asix.cz">www.ASIX.cz</a> 
+        <br />Microsoft podpora <a href="http://msdn.microsoft.com/en-us/default.aspx">Microsoft Developer Nework</a>
+        <br /><br /><a href="#home">nahoru -></a>
+     </div>
+     <div>
+        <h3 id="dokumentace">Dokumentace</h3>
+        <a href="KrokoveMotory.zip">Zdrojový kód aplikace</a><br />
+        <a href="mcu.zip">Zdrojový kód mikrokontrolérů</a><br />
+        <a href="control.pdf">Schéma desky řízení</a><br />
+        <a href="control_board.pdf">Deska řízení</a><br />
+        <a href="usb_uart.pdf">Schéma desky převodníku USB - UART</a><br />
+        <a href="usb_board.pdf">Deska převodníku USB -UART</a>
+        <br /><br /><a href="#home">nahoru -></a>
+     </div>
+     <div>
+        <h3 id="screenshots">Screenshots</h3>
+        <h4>Hlavní okno aplikace</h4>
+        <img id="aplikace" src="aplikace.jpg" alt="aplikace" title="screenshot okna aplikace"/>
+        <br /><br /><img src="manual.jpg" alt="manual" title="karta ovládání motorů" id="manual"/>
+        &nbsp<img src="demo.jpg" alt="demo" title="karta demo" id="demo"/>
+        &nbsp<img src="nastaveni.jpg" alt="nastavení" title="karta nastavení" id="nastaveni"/>
+        &nbsp<img src="log.jpg" alt="log" title="karta log - kontrolní výpis" id="log"/>
+        <br /><br /><a href="#home">nahoru -></a>
+     </div>
+	</body>
+</html>
